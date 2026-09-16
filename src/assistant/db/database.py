@@ -28,3 +28,14 @@ def get_db() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
+
+
+def init_db() -> None:
+    """Create all database tables that do not yet exist.
+
+    Imports the models module locally so its tables are always registered
+    on Base.metadata before creation, regardless of import order elsewhere.
+    """
+    from assistant.db import models  # noqa: F401
+
+    Base.metadata.create_all(bind=engine)
