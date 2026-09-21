@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
-from assistant.api.routes import health, tasks, weekly_goals
+from assistant.api.routes import health, planning, tasks, weekly_goals
 from assistant.config.settings import get_settings
 from assistant.db.database import init_db
 from assistant.services.errors import InvalidStateTransitionError, NotFoundError
@@ -25,6 +25,7 @@ app = FastAPI(title=settings.app_name, lifespan=lifespan)
 app.include_router(health.router)
 app.include_router(tasks.router)
 app.include_router(weekly_goals.router)
+app.include_router(planning.router)
 
 
 @app.exception_handler(NotFoundError)

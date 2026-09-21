@@ -12,6 +12,7 @@ dependencies = [
     "pydantic>=2.9.0",
     "pydantic-settings>=2.5.0",
     "sqlalchemy>=2.0.0",
+    "anthropic>=1.7.0",
 ]
 
 [dependency-groups]

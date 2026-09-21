@@ -15,6 +15,10 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./assistant.db"
     log_level: str = "INFO"
 
+    llm_api_key: str | None = None
+    llm_model: str = "claude-sonnet-5"
+    llm_max_tool_iterations: int = 4
+
 
 @lru_cache
 def get_settings() -> Settings:

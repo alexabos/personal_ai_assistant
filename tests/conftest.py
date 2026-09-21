@@ -47,3 +47,13 @@ def _reset_database() -> Generator[None, None, None]:
 @pytest.fixture
 def client() -> TestClient:
     return TestClient(app)
+
+
+@pytest.fixture
+def db_session() -> Generator[Session, None, None]:
+    """A raw Session for tests that call service functions directly (no HTTP)."""
+    db = TestingSessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
