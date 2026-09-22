@@ -22,7 +22,14 @@ class GetDailyPlanArgs(BaseModel):
     available_minutes: int | None = Field(
         default=None,
         gt=0,
-        description="How many minutes the user has available right now, if known.",
+        description=(
+            "The user's stated time budget in minutes, passed exactly as they said "
+            "it - including invalid values such as zero or negative numbers. Do not "
+            "silently correct, clamp, or round it, and do not omit it just because "
+            "it looks invalid; this tool validates it and will report back if it "
+            "isn't usable. Omit this field only when the user did not state any "
+            "time constraint at all."
+        ),
     )
 
 
@@ -39,8 +46,11 @@ GET_DAILY_PLAN_TOOL = Tool(
         "Get the user's current planning snapshot: tasks relevant today, overdue "
         "tasks, weekly goals falling behind pace, and a suggested next task. Call "
         "this whenever the user asks what to do, what's overdue, or wants a task "
-        "suggestion - optionally pass available_minutes if they mention how much "
-        "time they have."
+        "suggestion - optionally pass available_minutes if they state how much "
+        "time they have. Pass their stated number exactly, even if it looks "
+        "invalid (e.g. negative or zero) - never silently correct or drop it "
+        "yourself. Only omit available_minutes when no time constraint was "
+        "mentioned at all."
     ),
     args_model=GetDailyPlanArgs,
     handler=get_daily_plan,
