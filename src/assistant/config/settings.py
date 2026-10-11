@@ -19,6 +19,16 @@ class Settings(BaseSettings):
     llm_model: str = "claude-sonnet-5"
     llm_max_tool_iterations: int = 4
 
+    google_calendar_credentials_file: str = "credentials/google_calendar_credentials.json"
+    google_calendar_token_file: str = "credentials/google_calendar_token.json"
+    google_calendar_id: str = "primary"
+    default_timezone: str = "Europe/Madrid"
+
+    notion_api_key: str | None = None
+    notion_database_university: str | None = None
+    notion_database_sanofi: str | None = None
+    notion_database_personal: str | None = None
+
 
 @lru_cache
 def get_settings() -> Settings:

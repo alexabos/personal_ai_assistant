@@ -17,6 +17,9 @@ venv/
 # Environment files
 .env
 
+# Google Calendar OAuth credentials and cached token (Phase 5)
+credentials/
+
 # Databases
 *.db
 *.sqlite3

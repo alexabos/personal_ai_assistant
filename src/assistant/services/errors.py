@@ -12,3 +12,22 @@ class NotFoundError(Exception):
 
 class InvalidStateTransitionError(Exception):
     """Raised when a requested status transition is not allowed."""
+
+
+class CalendarServiceError(Exception):
+    """Raised when a calendar operation is invalid or the Google API fails.
+
+    Covers both input-level problems (e.g. an invalid date range) and
+    external failures (missing/expired credentials, Google API errors) -
+    callers only need to catch one type to know "the calendar operation
+    did not succeed."
+    """
+
+
+class NotionServiceError(Exception):
+    """Raised when a Notion operation is invalid or the Notion API fails.
+
+    Covers missing configuration, an unknown source, and external failures
+    (API errors) - callers only need to catch one type to know "the Notion
+    operation did not succeed."
+    """
